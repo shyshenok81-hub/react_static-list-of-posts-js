@@ -1,7 +1,8 @@
 import { UserInfo } from '../UserInfo/UserInfo';
+import { CommentList } from '../CommentList/CommentList';
 import './PostInfo.scss';
 
-export const PostInfo = ({ post, comments, users }) => {
+export const PostInfo = ({ post, comments = [], users = [] }) => {
   const { id, title, body, userId } = post;
 
   const user = users.find(u => u.id === userId);
@@ -26,26 +27,7 @@ export const PostInfo = ({ post, comments, users }) => {
       {postComments.length === 0 ? (
         <b data-cy="NoCommentsMessage">No comments yet</b>
       ) : (
-        <div className="CommentList">
-          {postComments.map(comment => (
-            <div key={comment.id} className="CommentInfo">
-              <div className="CommentInfo__title">
-                <strong className="CommentInfo__name">{comment.name}</strong>
-
-                {' by '}
-
-                <a
-                  className="CommentInfo__email"
-                  href={`mailto:${comment.email}`}
-                >
-                  {comment.email}
-                </a>
-              </div>
-
-              <div className="CommentInfo__body">{comment.body}</div>
-            </div>
-          ))}
-        </div>
+        <CommentList comments={postComments} />
       )}
     </div>
   );
