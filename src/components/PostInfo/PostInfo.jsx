@@ -1,8 +1,8 @@
-import { UserInfo } from '../UserInfo/UserInfo';
-import { CommentList } from '../CommentList/CommentList';
+import { UserInfo } from '../UserInfo';
+import { CommentList } from '../CommentList';
 import './PostInfo.scss';
 
-export const PostInfo = ({ post, comments = [], users = [] }) => {
+export const PostInfo = ({ post, comments, users }) => {
   const { id, title, body, userId } = post;
 
   const user = users.find(u => u.id === userId);
