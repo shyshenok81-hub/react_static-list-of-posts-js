@@ -2,12 +2,16 @@ import { UserInfo } from '../UserInfo';
 import { CommentList } from '../CommentList';
 import './PostInfo.scss';
 
-export const PostInfo = ({ post, comments, users }) => {
-  const { title, body, userId } = post;
+export const PostInfo = ({ post }) => {
+  const {
+    title,
+    body,
+    user, // беремо з post
+    comments = [], // теж з post
+  } = post;
 
-  const user = users.find(u => u.id === userId);
-
-  const postComments = comments?.filter(c => c.postId === post.id) || [];
+  // якщо раптом comments є, але треба перестрахуватись по postId
+  const postComments = comments;
 
   return (
     <div className="PostInfo">
