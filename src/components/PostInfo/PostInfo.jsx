@@ -1,17 +1,9 @@
-import { UserInfo } from '../UserInfo';
-import { CommentList } from '../CommentList';
+import { UserInfo } from '../UserInfo/UserInfo';
+import { CommentList } from '../CommentList/CommentList';
 import './PostInfo.scss';
 
 export const PostInfo = ({ post }) => {
-  const {
-    title,
-    body,
-    user, // беремо з post
-    comments = [], // теж з post
-  } = post;
-
-  // якщо раптом comments є, але треба перестрахуватись по postId
-  const postComments = comments;
+  const { title, body, user, comments } = post;
 
   return (
     <div className="PostInfo">
@@ -28,10 +20,10 @@ export const PostInfo = ({ post }) => {
 
       <hr />
 
-      {postComments.length === 0 ? (
-        <b data-cy="NoCommentsMessage">No comments yet</b>
+      {comments.length > 0 ? (
+        <CommentList comments={comments} />
       ) : (
-        <CommentList comments={postComments} />
+        <b data-cy="NoCommentsMessage">No comments yet</b>
       )}
     </div>
   );
